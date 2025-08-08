@@ -1,8 +1,12 @@
+import { NavLink } from 'react-router-dom';
+
 const Header = () => {
 	return (
 		<>
 			<header className='flex lg:flex-row flex-row-reverse items-center justify-between top-0 z-20 lg:px-28 px-10 py-2 fixed w-screen transition-all duration-300 ease-in-out shadow-custom-drop font-semibold'>
-				<img src='./src/assets/logo.png' alt='CO2 LABS Logo' className='cursor-pointer w-14' />
+				<NavLink to='/'>
+					<img src='./src/assets/logo.png' alt='CO2 LABS Logo' className='cursor-pointer w-14' />
+				</NavLink>
 
 				{/* NAVBAR */}
 				<nav className='lg:flex gap-10 hidden'>
