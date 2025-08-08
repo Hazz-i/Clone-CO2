@@ -111,7 +111,7 @@ const Footer = () => {
 						<div className='flex items-center'>
 							<input
 								type='text'
-								className='bg-white rounded-l-full placeholder:text-gray-500 font-normal text-sm py-2 px-4 flex-1 text-gray-500'
+								className='bg-white rounded-l-full placeholder:text-gray-500 font-normal text-sm py-2 lg:px-4 ps-2 flex-1 text-gray-500'
 								placeholder='Youremail@example.com'
 							/>
 							<button className='bg-[#eab308] text-black rounded-r-full px-6 py-2 text-sm cursor-pointer'>
@@ -170,10 +170,10 @@ const Footer = () => {
 				</div>
 
 				{/* Footer Bottom - Same for both desktop and mobile */}
-				<div className='flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-0'>
-					<small className='text-gray-400'>&copy;2024 CO2 Labs. All Right Reserved</small>
+				<div className='flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-0'>
+					<small className='text-gray-400 lg:order-1 order-2'>&copy;2024 CO2 Labs. All Right Reserved</small>
 
-					<span className='flex items-center gap-10 text-gray-400'>
+					<span className='flex items-center gap-10 text-gray-400 lg:order-2 order-1'>
 						<small className='hover:text-white cursor-pointer'>FAQ</small>
 						<small className='hover:text-white cursor-pointer'>Terms & Policy</small>
 					</span>

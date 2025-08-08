@@ -34,6 +34,7 @@ const services = [
 
 const Header = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -57,6 +58,14 @@ const Header = () => {
 		}
 	};
 
+	const toggleMobileMenu = () => {
+		setIsMobileMenuOpen(!isMobileMenuOpen);
+	};
+
+	const closeMobileMenu = () => {
+		setIsMobileMenuOpen(false);
+	};
+
 	useEffect(() => {
 		const handleScroll = () => {
 			const scrollTop = window.scrollY;
@@ -73,7 +82,7 @@ const Header = () => {
 	return (
 		<>
 			<header
-				className={`flex lg:flex-row bg-white flex-row-reverse items-center justify-between top-0 z-20 lg:px-28 px-10 py-2 fixed w-screen transition-all duration-300 ease-in-out font-semibold ${
+				className={`flex bg-white items-center justify-between top-0 z-20 lg:px-28 px-10 py-2 fixed w-screen transition-all duration-300 ease-in-out font-semibold ${
 					isScrolled ? 'shadow-md' : ''
 				}`}
 			>
@@ -81,10 +90,10 @@ const Header = () => {
 					<img src='./src/assets/logo.png' alt='CO2 LABS Logo' className='cursor-pointer w-14' />
 				</NavLink>
 
-				{/* NAVBAR */}
+				{/* NAVBAR - Desktop */}
 				<nav className='lg:flex gap-10 hidden'>
 					<span className='relative group'>
-						<button className='cursor-pointer font-generalsans font-medium'>
+						<button className='cursor-pointer font-medium'>
 							Our Services
 							<i className='bx bx-chevron-down ml-2 transform transition-transform duration-300 ease-in-out group-hover:rotate-180 arrow-icon'></i>
 						</button>
@@ -112,31 +121,135 @@ const Header = () => {
 							</div>
 						</div>
 					</span>
+
 					<button
-						className='cursor-pointer font-generalsans font-medium'
+						className='cursor-pointer font-medium'
 						onClick={() => handleScrollToSection('about')}
 					>
 						About Us
 					</button>
 					<button
-						className='cursor-pointer font-generalsans font-medium'
+						className='cursor-pointer font-medium'
 						onClick={() => handleScrollToSection('portfolio')}
 					>
 						Portfolio
 					</button>
 					<button
-						className='cursor-pointer font-generalsans font-medium'
+						className='cursor-pointer font-medium'
 						onClick={() => handleScrollToSection('contact')}
 					>
 						Contact
 					</button>
 				</nav>
 
-				{/* CTA */}
-				<button className='cursor-pointer bg-primary text-white px-4 py-2 rounded'>
+				{/* CTA - Desktop */}
+				<button className='cursor-pointer bg-primary text-white px-4 py-2 rounded hidden lg:block'>
 					<small>Get Started Today!</small>
 				</button>
+
+				{/* Hamburger Menu Button - Mobile */}
+				<button
+					className='lg:hidden flex flex-col justify-center items-center w-8 h-8 relative z-30'
+					onClick={toggleMobileMenu}
+				>
+					<span
+						className={`block h-0.5 w-6 bg-gray-800 transition-all duration-300 ease-in-out ${
+							isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''
+						}`}
+					></span>
+					<span
+						className={`block h-0.5 w-6 bg-gray-800 transition-all duration-300 ease-in-out my-1 ${
+							isMobileMenuOpen ? 'opacity-0' : ''
+						}`}
+					></span>
+					<span
+						className={`block h-0.5 w-6 bg-gray-800 transition-all duration-300 ease-in-out ${
+							isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
+						}`}
+					></span>
+				</button>
 			</header>
+
+			{/* Mobile Menu Overlay */}
+			<div
+				className={`fixed inset-0 bg-white bg-opacity-50 z-25 lg:hidden transition-opacity duration-300 ${
+					isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+				}`}
+				onClick={closeMobileMenu}
+			></div>
+
+			{/* Mobile Menu Slider */}
+			<nav
+				className={`fixed top-0 left-0 h-full w-80 bg-white shadow-xl z-30 lg:hidden transform transition-transform duration-300 ease-in-out ${
+					isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+				}`}
+			>
+				<div className='px-4 pt-20'>
+					{/* Close Button */}
+					<button
+						className='absolute top-6 left-6 w-8 h-8 flex items-center justify-center'
+						onClick={closeMobileMenu}
+					>
+						<i className='bx bx-x text-5xl text-gray-600'></i>
+					</button>
+
+					{/* Mobile Menu Items */}
+					<div className='space-y-2'>
+						<div>
+							<h3 className='block w-full text-left py-2 px-4 rounded-md text-gray-800 font-semibold bg-accent/40 '>
+								Our Services
+							</h3>
+							<div className='space-y-3 pl-2'>
+								{services.map((service, index) => (
+									<NavLink
+										key={index}
+										to={service.link}
+										className='flex items-center gap-3 py-2 hover:text-gray-800'
+										onClick={closeMobileMenu}
+									>
+										<span className='w-1 h-1 bg-black rounded-full'></span>
+										<span className='text-sm font-medium underline'>{service.name}</span>
+									</NavLink>
+								))}
+							</div>
+						</div>
+
+						<button
+							className='block w-full text-left py-2 px-4 rounded-md text-gray-800 font-semibold bg-accent/40 '
+							onClick={() => {
+								handleScrollToSection('about');
+								closeMobileMenu();
+							}}
+						>
+							About Us
+						</button>
+
+						<button
+							className='block w-full text-left py-2 px-4 rounded-md text-gray-800 font-semibold bg-accent/40 '
+							onClick={() => {
+								handleScrollToSection('portfolio');
+								closeMobileMenu();
+							}}
+						>
+							Portfolio
+						</button>
+
+						<button
+							className='block w-full text-left py-2 px-4 rounded-md text-gray-800 font-semibold bg-accent/40 '
+							onClick={() => {
+								handleScrollToSection('contact');
+								closeMobileMenu();
+							}}
+						>
+							Contact Us
+						</button>
+
+						<button className='w-full bg-primary text-white px-6 py-3 rounded mt-6'>
+							Get Started Today!
+						</button>
+					</div>
+				</div>
+			</nav>
 		</>
 	);
 };

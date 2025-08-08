@@ -1,4 +1,7 @@
 import { NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const services = [
 	{
@@ -125,34 +128,58 @@ const portofolio = [
 const howtoknow = ['linkedin', 'Instagram', 'Job Ads', 'Events and Seminars', 'other'];
 
 const Home = () => {
+	const [expandedCard, setExpandedCard] = useState(null);
+
+	useEffect(() => {
+		AOS.init({
+			duration: 500,
+			easing: 'ease-in-out',
+			once: true,
+			mirror: false,
+		});
+	}, []);
+
+	const handleCardClick = (index: any) => {
+		if (window.innerWidth < 1024) {
+			setExpandedCard(expandedCard === index ? null : index);
+		}
+	};
+
 	return (
 		<>
 			{/* HERO SECTION */}
 			<section className='h-screen flex justify-between items-center lg:mb-0 mb-20'>
 				<div className='lg:ml-28 ml-10 w-full'>
-					<div className='lg:flex items-center justify-between box-border lg:w-2/3'>
-						<div className='lg:w-2/3 lg:mr-0 mr-10 lg:order-1'>
-							<h1 className='sm:text-5xl text-3xl sm:flex flex-col items-start aos-init aos-animate'>
-								<div className='mb-4'>Where Code Meets </div>
-								<span className='font-orbitron font-bold sm:text-5xl text-3xl bg-primary text-white px-5'>
+					<div className='flex flex-col lg:flex-row items-center justify-between box-border lg:w-2/3'>
+						<div className='lg:w-2/3 lg:mr-0 mr-10 lg:order-1 order-2'>
+							<h1
+								className='sm:text-5xl text-3xl sm:flex flex-col items-start'
+								data-aos='fade-right'
+							>
+								<div className='mb-4 font-orbitron font-bold'>Where Code Meets </div>
+								<span className='font-bold sm:text-5xl text-3xl bg-primary text-white px-5 font-orbitron'>
 									Creativity
 								</span>
 							</h1>
-							<h6 className='my-5 aos-init aos-animate'>
+							<h6 className='my-5' data-aos='fade-right'>
 								Harnessing the power of our Coding Collective to build solutions for your business
 								needs.
 							</h6>
 
-							<button className='bg-primary text-white px-4 py-2 rounded mt-4 cursor-pointer'>
+							<button
+								className='bg-primary text-white px-4 py-2 rounded mt-4 cursor-pointer'
+								data-aos='fade-up'
+							>
 								<small className='font-semibold'>Get a free consult</small>
 							</button>
 						</div>
 
 						{/* RIGHT CONTENT */}
-						<div className='lg:order-2 flex justify-end items-center '>
+						<div className='lg:order-2 flex justify-end items-center order-1'>
 							<img
 								src='./src/assets/HeroHome.png'
-								className='lg:w-96 sm:w-1/2 w-2/3 absolute md:right-40 right-20 rounded-xl shadow-md aos-init aos-animate'
+								className='lg:w-96 sm:w-1/2 w-2/3 absolute md:right-40 right-20 rounded-xl shadow-md'
+								data-aos='fade-right'
 								alt=''
 							/>
 							<img
@@ -164,10 +191,11 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
+
 			{/* SERVICE */}
 			<section className='bg-primary flex items-center justify-center py-40' id='services'>
 				<div className='flex flex-col gap-5'>
-					<h1 className='sm:text-center xl:text-left text-white sm:mx-0 mx-10 text-4xl font-bold'>
+					<h1 className='sm:text-center xl:text-left text-white sm:mx-0 mx-10 text-5xl font-bold font-orbitron'>
 						Our Services
 					</h1>
 					<div className='flex flex-wrap gap-3 justify-center'>
@@ -175,6 +203,8 @@ const Home = () => {
 							<div
 								key={index}
 								className='card rounded-xl shadow-lg bg-white h-96 w-72 p-7 flex flex-col items-center justify-center card-animation text-center gap-2'
+								data-aos='fade-up'
+								data-aos-delay={index * 50}
 							>
 								<div className='bg-accent w-20 h-20 flex justify-center items-center rounded-full mb-5'>
 									<i className={`${service.icon} text-4xl`}></i>
@@ -191,30 +221,32 @@ const Home = () => {
 			</section>
 
 			{/* APPROACH */}
-			<section
-				className='xl:h-screen h-full flex flex-col items-center mt-20 lg:px-28 px-10'
-				id='approach'
-			>
+			<section className='xl:h-screen h-full flex flex-col items-center mt-20 px-0' id='approach'>
 				<div className='text-center'>
-					<h1 className='text-3xl font-bold'>ACE</h1>
-					<p className='text-center max-w-2xl font-semibold'>
+					<h1 className='text-5xl font-bold font-orbitron mb-5'>ACE</h1>
+					<p className='text-center max-w-2xl font-semibold text-xl'>
 						Methodology for Strategic Consulting
 					</p>
 				</div>
 
-				<div className='grid lg:grid-cols-3 grid-cols-1 gap-0 w-full max-w-6xl mt-10'>
+				<div className='grid lg:grid-cols-3 grid-cols-1 gap-0 w-full mt-10'>
 					{approach.map((item, index) => (
 						<div
 							key={index}
-							className={`relative group p-8 h-[10rem] flex flex-col cursor-pointer transition-all duration-500 ease-in-out ${
+							className={`relative group p-8 flex flex-col cursor-pointer transition-all duration-500 ease-in-out ${
 								index === 0 ? 'bg-[#e8e4dc]' : index === 1 ? 'bg-[#a8b5b8]' : 'bg-[#e8e4dc]'
-							} hover:h-[30rem]`}
+							} ${expandedCard === index ? 'h-auto lg:h-[30rem]' : 'h-[10rem]'} lg:hover:h-[30rem]`}
+							onClick={() => handleCardClick(index)}
 						>
-							<h2 className='text-2xl font-bold mb-2'>{item.title}</h2>
+							<h2 className='text-2xl font-extrabold mb-2'>{item.title}</h2>
 							<h3 className='text-lg font-medium mb-6'>{item.subtitle}</h3>
 
 							{/* Chevron positioned under subtitle when content is hidden */}
-							<div className='opacity-100 group-hover:opacity-0 transition-opacity duration-300 ease-in-out'>
+							<div
+								className={`${
+									expandedCard === index ? 'opacity-0' : 'opacity-100'
+								} lg:opacity-100 lg:group-hover:opacity-0 transition-opacity duration-300 ease-in-out`}
+							>
 								<div className='flex justify-center'>
 									<i
 										className={`text-3xl ${
@@ -228,8 +260,12 @@ const Home = () => {
 								</div>
 							</div>
 
-							{/* Content that shows on hover */}
-							<div className='opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex-1 flex flex-col'>
+							{/* Content that shows on click (mobile) or hover (desktop) */}
+							<div
+								className={`${
+									expandedCard === index ? 'opacity-100' : 'opacity-0'
+								} lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex-1 flex flex-col`}
+							>
 								<p className='text-sm leading-relaxed mb-8'>{item.description}</p>
 
 								<ul className='space-y-3 flex-1'>
@@ -260,27 +296,39 @@ const Home = () => {
 			</section>
 
 			{/* ABOUT */}
-			<section className='lg:h-screen flex justify-center mb-40' id='about'>
-				<div className='flex items-center gap-15'>
+			<section
+				className='lg:h-screen flex justify-center items-center py-20 lg:py-0 px-8'
+				id='about'
+			>
+				<div className='flex items-center gap-15  flex-col lg:flex-row'>
 					<span className='grid gap-5'>
-						<h1 className='text-4xl font-bold text-right'>About US</h1>
-						<p className='max-w-2xl text-right'>
+						<h1
+							className='text-5xl font-bold font-orbitron text-center lg:text-right'
+							data-aos='fade-up'
+							data-aos-delay='0'
+						>
+							About US
+						</h1>
+						<p className='max-w-2xl lg:text-right text-lg' data-aos='fade-up' data-aos-delay='100'>
 							At CO2 Labs, we strive to provide simple yet powerful software solutions and expert
 							consultation to help your business thrive in the digital world.
 						</p>
 					</span>
-
-					<img
-						src='./src/assets/AboutImg.png'
-						alt='About Us'
-						className='w-1/2 h-[30rem] rounded-lg '
-					/>
+					<div
+						className='flex justify-center items-center lg:w-1/2 aos-init aos-animate'
+						data-aos='fade-up'
+						data-aos-delay='200'
+					>
+						<img src='./src/assets/AboutImg.png' alt='About Us' className='rounded-xl' />
+					</div>
 				</div>
 			</section>
 
 			{/* OUR TEAM */}
 			<section className='lg:px-28 px-10 py-20 flex flex-col justify-center' id='team'>
-				<h1 className='text-4xl font-bold mb-4'>Our Team</h1>
+				<h1 className='text-5xl font-bold font-orbitron mb-20 lg:text-left text-center'>
+					Our Team
+				</h1>
 
 				<div className='grid lg:grid-cols-3 grid-cols-1 gap-5'>
 					{team.map((member, index) => (
@@ -298,12 +346,12 @@ const Home = () => {
 							</div>
 
 							{/* Card Content */}
-							<div className='bg-white p-8 rounded-2xl shadow-lg text-center h-[20rem] mt-20 pt-20 border border-gray-100 group-hover:shadow-lg'>
+							<div className='p-8 rounded-2xl lg:shadow-lg text-center mt-20 pt-20 lg:border lg:border-gray-100 group-hover:shadow-lg flex-1'>
 								<h2 className='text-2xl font-bold  cursor-text'>{member.name}</h2>
 								<p className='font-semibold text-gray-600 mb-2 cursor-text'>{member.position}</p>
-								<p className='text-xs text-gray-700 leading-relaxed cursor-text'>
+								<i className='text-xs/tight font-semibold leading-relaxed cursor-text '>
 									{member.description}
-								</p>
+								</i>
 							</div>
 						</div>
 					))}
@@ -315,9 +363,9 @@ const Home = () => {
 				className='bg-primary-500 lg:px-28 px-10 py-20 mt-20 text-white bg-primary'
 				id='portfolio'
 			>
-				<h1 className='text-4xl font-bold mb-4'>Our Portofolio</h1>
+				<h1 className='text-5xl font-bold font-orbitron mb-4'>Our Portofolio</h1>
 
-				<div className='flex items-center justify-center gap-5'>
+				<div className='flex items-center justify-center gap-5 flex-col lg:flex-row'>
 					{portofolio.map((item, index) => (
 						<NavLink
 							to={item.link}
@@ -344,9 +392,9 @@ const Home = () => {
 			</section>
 
 			{/* CONTACTS */}
-			<section className='lg:mx-28 mx-10 flex flex-col gap-16 py-24'>
-				<span className='flex justify-between items-center mb-4'>
-					<h1 className='text-4xl font-bold'>Contact Us</h1>
+			<section className='lg:mx-28 mx-10 flex flex-col gap-16 py-24' id='contact'>
+				<span className='flex justify-between items-center mb-4 lg:flex-row flex-col gap-10'>
+					<h1 className='text-5xl font-bold font-orbitron'>Contact Us</h1>
 
 					<div className='flex items-center gap-10'>
 						<i className='bx bxs-map text-4xl'></i>
@@ -354,7 +402,8 @@ const Home = () => {
 						<i className='bx bxs-phone text-4xl'></i>
 					</div>
 				</span>
-				<div className='flex gap-20'>
+
+				<div className='flex gap-10 lg:gap-20 flex-col lg:flex-row'>
 					<div className='border grid gap-3 px-5 py-10 rounded-md border-gray-100 shadow-md flex-1'>
 						<p className='font-semibold text-xl'>Hi there, how can we help?</p>
 						<input
@@ -376,7 +425,7 @@ const Home = () => {
 
 						<span className='grid gap-1'>
 							<p className='font-semibold'>Hi there, how can we help?</p>
-							<div className='flex gap-2'>
+							<div className='flex gap-2 flex-wrap'>
 								{howtoknow.map((option, idx) => (
 									<span key={idx} className='flex items-center gap-2'>
 										<input type='radio' name='help' id={`help${idx}`} value={option} />
@@ -398,12 +447,11 @@ const Home = () => {
 						<iframe
 							src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.807639!2d103.793557!3d1.2762578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1b27c7a1b85f%3A0xd6085c5205635a1c!2sCoding%20Collective!5e0!3m2!1sen!2s!4v1625097600000!5m2!1sen!2s'
 							width='100%'
-							height='500'
 							style={{ border: 0 }}
 							allowFullScreen={true}
 							loading='lazy'
 							referrerPolicy='no-referrer-when-downgrade'
-							className='rounded-md shadow-md'
+							className='rounded-md shadow-md h-[10rem] lg:h-[30rem]'
 						></iframe>
 					</div>
 				</div>
