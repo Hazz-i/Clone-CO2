@@ -88,7 +88,6 @@ const Header = () => {
 							Our Services
 							<i className='bx bx-chevron-down ml-2 transform transition-transform duration-300 ease-in-out group-hover:rotate-180 arrow-icon'></i>
 						</button>
-						<div className='absolute left-0 right-0 hidden h-0 group-hover:h-1 bg-primary transition-all duration-300 ease-in-out'></div>
 
 						{/* Dropdown Menu */}
 						<div className='absolute top-full left-0 mt-2 w-[50rem] bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out z-50'>
