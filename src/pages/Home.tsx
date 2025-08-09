@@ -101,27 +101,27 @@ const portofolio = [
 	{
 		title: 'AOTC Cosmetics',
 		img: 'https://labsco2.com/images/portfolio.png',
-		link: '/portfolio/aotc-cosmetics',
+		link: 'https://aotc.sg',
 	},
 	{
 		title: 'Nosh kitchen Website',
 		img: 'https://labsco2.com/images/portfolio-1.png',
-		link: '/portfolio/nosh-kitchen',
+		link: 'https://noshkitchen.com.sg',
 	},
 	{
 		title: 'Michelah Event Organizer Singapore',
 		img: 'https://labsco2.com/images/portfolio-2.png',
-		link: '/portfolio/michelah-event-organizer',
+		link: 'https://michelah.com',
 	},
 	{
 		title: 'Joywaltzstudio Academy',
 		img: 'https://labsco2.com/images/portfolio-3.png',
-		link: '/portfolio/project-four',
+		link: 'https://pianistprodigy.com',
 	},
 	{
 		title: 'Octopay Payment',
 		img: 'https://labsco2.com/images/portfolio-4.png',
-		link: '/portfolio/project-five',
+		link: 'https://octopay.asia',
 	},
 ];
 
@@ -176,6 +176,7 @@ const Home = () => {
 							<button
 								className='bg-primary text-white px-4 py-2 rounded mt-4 cursor-pointer'
 								data-aos='fade-up'
+								onClick={handleWhatsAppClick}
 							>
 								<small className='font-semibold'>Get a free consult</small>
 							</button>
