@@ -39,7 +39,7 @@ const Hero = ({ title, subtitle, img_url }: Props) => {
 							alt=''
 						/>
 						<img
-							src='./src/assets/HeroElem.png'
+							src='https://labsco2.com/images/backdrop.png'
 							alt=''
 							className='-z-10 lg:w-[400px] sm:w-1/2 w-2/3 lg:absolute right-0'
 						/>
