@@ -77,21 +77,21 @@ const team = [
 	{
 		name: 'Jay Chen',
 		position: 'CEO',
-		image: './src/assets/JayChen.jpeg',
+		image: 'https://labsco2.com/images/profile1.jpeg',
 		description:
 			'Jay began his career in the banking and finance sector, where he honed his skills and developed a deep understanding of the industry. Leveraging this foundation, he expanded into HR operations and outsourcing, successfully growing his businesses by delivering exceptional service to renowned international brands like Huawei, Coca-Cola, and GlaxoSmithKline. CO2 Labs provides a solutions based approach to champion human resource and outsourcing through strategic consultation and meticulously planned placements.',
 	},
 	{
 		name: 'Alune',
 		position: 'Development Project Manager',
-		image: './src/assets/Alune.jpeg',
+		image: 'https://labsco2.com/images/profile2.jpeg',
 		description:
 			'With a background in IT software development, quality testing and web design, she brings a deep understanding of the technical and strategic aspects of project management. Known for her meticulous planning, effective communication, and ability to navigate challenges, she has consistently delivered high-quality software solutions on time and within budget. Alune excels at fostering collaboration across cross-functional teams, ensuring that projects align with client objectives and business goals. Her dedication to excellence and passion for innovation make her a driving force behind the success of every project she leads.',
 	},
 	{
 		name: 'Ron',
 		position: 'Business Development Lead',
-		image: './src/assets/Ron.jpeg',
+		image: 'https://labsco2.com/images/profile3.jpeg',
 		description:
 			'With a strong background in business development for finance, logistics and real estate industries, Ron has successfully led initiatives that have significantly increased reach and increased revenue for both emerging and established companies. Known for his ability to identify new opportunities and forge lasting relationships, Ron excels in creating tailored solutions that meet client needs and align with business goals through thoughtful solutioning.',
 	},
@@ -184,13 +184,13 @@ const Home = () => {
 						{/* RIGHT CONTENT */}
 						<div className='lg:order-2 flex justify-end items-center order-1'>
 							<img
-								src='./src/assets/HeroHome.png'
+								src='https://labsco2.com/images/heroimg.png'
 								className='lg:w-96 sm:w-1/2 w-2/3 absolute md:right-40 right-20 rounded-xl shadow-md'
 								data-aos='fade-right'
 								alt=''
 							/>
 							<img
-								src='./src/assets/HeroElem.png'
+								src='https://labsco2.com/images/backdrop.png'
 								alt=''
 								className='-z-10 lg:w-[400px] sm:w-1/2 w-2/3 lg:absolute right-0'
 							/>
@@ -319,6 +319,26 @@ const Home = () => {
 						<p className='max-w-2xl lg:text-right text-lg' data-aos='fade-up' data-aos-delay='100'>
 							At CO2 Labs, we strive to provide simple yet powerful software solutions and expert
 							consultation to help your business thrive in the digital world.
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								className='w-full mt-5'
+								height='120'
+								viewBox='0 0 1200 120'
+								preserveAspectRatio='xMidYMid meet'
+							>
+								<path
+									d='M 20 70
+										C 140 30, 320 20, 480 30
+										C 640 40, 820 50, 980 40
+										C 1050 35, 1140 28, 1180 30'
+									fill='none'
+									stroke='#EFECE4'
+									stroke-width='10'
+									stroke-linecap='round'
+									stroke-linejoin='round'
+									stroke-opacity='1'
+								/>
+							</svg>
 						</p>
 					</span>
 					<div
@@ -326,7 +346,11 @@ const Home = () => {
 						data-aos='fade-up'
 						data-aos-delay='200'
 					>
-						<img src='./src/assets/AboutImg.png' alt='About Us' className='rounded-xl' />
+						<img
+							src='https://labsco2.com/images/about-img.png'
+							alt='About Us'
+							className='rounded-xl'
+						/>
 					</div>
 				</div>
 			</section>
@@ -341,7 +365,7 @@ const Home = () => {
 					{team.map((member, index) => (
 						<div
 							key={index}
-							className='flex flex-col items-center relative group hover:scale-110 transition-transform duration-300 hover:z-30'
+							className='flex flex-col items-center relative group hover:scale-110 transition-transform duration-300 hover:z-50 bg-white'
 						>
 							{/* Profile Image */}
 							<div className='w-40 h-40 rounded-full overflow-hidden shadow-md absolute '>

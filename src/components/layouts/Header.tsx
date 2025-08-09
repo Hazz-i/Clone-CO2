@@ -99,7 +99,11 @@ const Header = () => {
 				}`}
 			>
 				<NavLink to='/'>
-					<img src='./src/assets/logo.png' alt='CO2 LABS Logo' className='cursor-pointer w-14' />
+					<img
+						src='https://labsco2.com/images/logo.png'
+						alt='CO2 LABS Logo'
+						className='cursor-pointer w-14'
+					/>
 				</NavLink>
 
 				{/* NAVBAR - Desktop */}
