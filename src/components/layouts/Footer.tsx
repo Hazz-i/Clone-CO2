@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 const footerList = [
 	{
@@ -13,9 +14,9 @@ const footerList = [
 	{
 		title: 'About',
 		links: [
-			{ name: 'Our Approach', href: '/#approach' },
-			{ name: 'Our Team', href: '/#team' },
-			{ name: 'Our Portfolio', href: '/#portfolio' },
+			{ name: 'Our Approach', href: 'approach' },
+			{ name: 'Our Team', href: 'team' },
+			{ name: 'Our Portfolio', href: 'portfolio' },
 		],
 	},
 	{
@@ -29,6 +30,29 @@ const footerList = [
 ];
 
 const Footer = () => {
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const handleScrollToSection = (sectionId: string) => {
+		if (location.pathname !== '/') {
+			// Jika tidak di home page, navigate ke home dulu
+			navigate('/');
+			// Tunggu sebentar untuk memastikan page sudah load, kemudian scroll
+			setTimeout(() => {
+				const element = document.getElementById(sectionId);
+				if (element) {
+					element.scrollIntoView({ behavior: 'smooth' });
+				}
+			}, 100);
+		} else {
+			// Jika sudah di home page, langsung scroll
+			const element = document.getElementById(sectionId);
+			if (element) {
+				element.scrollIntoView({ behavior: 'smooth' });
+			}
+		}
+	};
+
 	return (
 		<footer className='bg-[#141516] lg:px-28 px-10 text-white pt-20 pb-10'>
 			<div className='grid w-full gap-8'>
@@ -68,6 +92,16 @@ const Footer = () => {
 													<i className={link.icon + ' text-lg mr-3'}></i>
 													{link.text}
 												</span>
+											) : link.href === 'approach' ||
+											  link.href === 'team' ||
+											  link.href === 'portfolio' ? (
+												<button
+													className='text-gray-400 hover:text-white flex items-center transition-colors w-full text-left'
+													onClick={() => handleScrollToSection(link.href)}
+												>
+													<span className='w-1 h-1 bg-gray-400 rounded-full mr-3'></span>
+													{link.name}
+												</button>
 											) : link.href?.startsWith('/#') ? (
 												<a
 													href={link.href}
@@ -137,22 +171,16 @@ const Footer = () => {
 												<i className={link.icon + ' text-lg mr-3'}></i>
 												{link.text}
 											</span>
-										) : link.href?.startsWith('/#') ? (
-											<a
-												href={link.href}
-												className='text-gray-400 hover:text-white flex items-center transition-colors'
-												onClick={(e) => {
-													e.preventDefault();
-													const id = link.href.replace('/#', '');
-													const element = document.getElementById(id);
-													if (element) {
-														element.scrollIntoView({ behavior: 'smooth' });
-													}
-												}}
+										) : link.href === 'approach' ||
+										  link.href === 'team' ||
+										  link.href === 'portfolio' ? (
+											<button
+												className='text-gray-400 hover:text-white flex items-center transition-colors w-full text-left'
+												onClick={() => handleScrollToSection(link.href)}
 											>
 												<span className='w-1 h-1 bg-gray-400 rounded-full mr-3'></span>
 												{link.name}
-											</a>
+											</button>
 										) : (
 											<Link
 												to={link.href}
@@ -171,7 +199,9 @@ const Footer = () => {
 
 				{/* Footer Bottom - Same for both desktop and mobile */}
 				<div className='flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-0'>
-					<small className='text-gray-400 lg:order-1 order-2'>&copy;2024 CO2 Labs. All Right Reserved</small>
+					<small className='text-gray-400 lg:order-1 order-2'>
+						&copy;2024 CO2 Labs. All Right Reserved
+					</small>
 
 					<span className='flex items-center gap-10 text-gray-400 lg:order-2 order-1'>
 						<small className='hover:text-white cursor-pointer'>FAQ</small>

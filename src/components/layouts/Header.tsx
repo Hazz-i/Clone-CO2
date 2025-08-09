@@ -79,6 +79,18 @@ const Header = () => {
 		};
 	}, []);
 
+	// Scroll to top when route changes
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [location.pathname]);
+
+	const handleWhatsAppClick = () => {
+		window.open(
+			'https://api.whatsapp.com/send/?phone=6581181595&text=Hi+Co2%2C+I+would+like+ask+about+your+services.&type=phone_number&app_absent=0',
+			'_blank'
+		);
+	};
+
 	return (
 		<>
 			<header
@@ -143,7 +155,10 @@ const Header = () => {
 				</nav>
 
 				{/* CTA - Desktop */}
-				<button className='cursor-pointer bg-primary text-white px-4 py-2 rounded hidden lg:block'>
+				<button
+					className='cursor-pointer bg-primary text-white px-4 py-2 rounded hidden lg:block'
+					onClick={handleWhatsAppClick}
+				>
 					<small>Get Started Today!</small>
 				</button>
 
@@ -244,7 +259,10 @@ const Header = () => {
 							Contact Us
 						</button>
 
-						<button className='w-full bg-primary text-white px-6 py-3 rounded mt-6'>
+						<button
+							className='w-full bg-primary text-white px-6 py-3 rounded mt-6'
+							onClick={handleWhatsAppClick}
+						>
 							Get Started Today!
 						</button>
 					</div>

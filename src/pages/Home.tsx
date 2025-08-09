@@ -145,6 +145,13 @@ const Home = () => {
 		}
 	};
 
+	const handleWhatsAppClick = () => {
+		window.open(
+			'https://api.whatsapp.com/send/?phone=6581181595&text=Hi+Co2%2C+I+would+like+ask+about+your+services.&type=phone_number&app_absent=0',
+			'_blank'
+		);
+	};
+
 	return (
 		<>
 			{/* HERO SECTION */}
@@ -397,9 +404,12 @@ const Home = () => {
 					<h1 className='text-5xl font-bold font-orbitron'>Contact Us</h1>
 
 					<div className='flex items-center gap-10'>
-						<i className='bx bxs-map text-4xl'></i>
-						<i className='bx bxs-envelope text-4xl'></i>
-						<i className='bx bxs-phone text-4xl'></i>
+						<i className='bx bxs-map text-4xl cursor-pointer'></i>
+						<i
+							className='bx bxs-envelope text-4xl cursor-pointer'
+							onClick={() => window.open('mailto:info@co2labs.com', '_blank')}
+						></i>
+						<i className='bx bxs-phone text-4xl cursor-pointer' onClick={handleWhatsAppClick}></i>
 					</div>
 				</span>
 
